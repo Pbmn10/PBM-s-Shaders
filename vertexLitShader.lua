@@ -45,9 +45,6 @@ local shader = love.graphics.newShader [[
               faceHeading = faceHeading + 3.14159265;
             }
             
-            vec3 adj = vec3(camPos[0]/modelScale[0], camPos[1]/modelScale[1], camPos[2]);///modelScale;
-            dist = sqrt((vertex_position[0]-adj[0])*(vertex_position[0]-adj[0])+(vertex_position[1]-adj[1])*(vertex_position[1]-adj[1])+1*1);
-            
             vertexColor = VertexColor;
             return projectionMatrix * viewMatrix * modelMatrix * vertex_position;
         }
@@ -62,11 +59,6 @@ local shader = love.graphics.newShader [[
             vec4 texcolor = Texel(tex, vec2(texcoord.x, 1-texcoord.y));
             if (texcolor.a == 0.0) { discard; }
             
-            //vec4 newColor = vec4(texcolor)*color*vertexColor*(normal[2]+1.0f)/(2.0f);
-            float dist_round = (1/dist);
-            if (dist_round > 1.0f){
-              dist_round = 1.0f;
-            }
             float pi = 3.14159265;
             float mult = ((normal[2]+1)/2)*((normal[2]+1)/2)*intensity;
             
